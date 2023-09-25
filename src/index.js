@@ -1,16 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const tick = () => {
-  
-  const elem = (
-    <div>
+
+class Hello extends React.Component{
+  render(){
+    return(
       <h1>سلام دوستان عزیز</h1>
-      <h2>tims is: {new Date().toLocaleTimeString()}</h2>
-    </div>
-  );
+    );
+  }
+}
+
+class Timer extends React.Component{
+  render () {
+    return(
+      <h2>
+        tims is: {new Date().toLocaleTimeString()}
+      </h2>
+    );
+  }
+}
+
+class App extends React.Component{
+  render(){
+    return (
+      <div>
+        <Hello />
+        <Timer /> 
+      </div>
+    );
+  }
+}
+
+
+const tick = () => {
   root.render(
-    elem
+    <App />
   );
 }
 
