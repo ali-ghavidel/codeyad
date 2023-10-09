@@ -4,10 +4,18 @@ import Timer from './Timer';
 import './style.css';
 
 class App extends Component {
+    constructor () {
+        super();
+
+        this.state = {
+            title: 'its a timer'
+        }
+    }
+    
     render() {
         return (
             <div className='main'>
-                <Hello />
+                <Hello title={this.title} />
                 <Timer /> 
             </div>
         );

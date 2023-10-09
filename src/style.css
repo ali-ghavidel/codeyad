@@ -25,3 +25,30 @@ body {
     background-color: black;
     color: chocolate;
 }
+.timerButtons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1em;
+}
+.timerButtons_style{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    border: none;
+    margin: 0 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 10px 0 rgba(255, 255, 255, 0.3);
+}
+.success{
+    background-color: green;
+    color: white;
+}
+.danger{
+    background-color: red;
+    color: white;
+}
+.warning{
+    background-color: orange;
+    color: white;
+}
