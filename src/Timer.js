@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './style.css'
+import TimeList from './TimeList';
 
 var interval;
 class Timer extends Component {
@@ -54,14 +55,21 @@ class Timer extends Component {
           second: 0
         })
       }
-    
+
+      handleTimeList = () => {
+        let h = this.state.hour;
+        let m = this.state.minute;
+        let s = this.state.second;
+        let newTime = `${h > 9 ? h : "0"+h} : ${m > 9 ? m : '0'+m} : ${s > 9 ? s : '0'+s}`;
+        this.props.setTimeArr([... this.props.timeArr, newTime]);
+      }
     render () {
         let h = this.state.hour;
         let m = this.state.minute;
         let s = this.state.second;
             return(
                 <Fragment>
-                  <h2 className="timer">
+                  <h2 className="timer" onClick={this.handleTimeList}>
                     {`${h > 9 ? h : "0"+h} : ${m > 9 ? m : '0'+m} : ${s > 9 ? s : '0'+s}`}
                   </h2>
                   <div className='timerButtons'>
@@ -78,6 +86,9 @@ class Timer extends Component {
                       {this.props.isLight ? 'dark' : 'light'}
                     </button>
                   </div>
+                  <TimeList>
+                      {this.props.timeArr}
+                  </TimeList>
                 </Fragment>
               );
         }

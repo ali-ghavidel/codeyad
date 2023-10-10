@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Hello from './Hello';
 import Timer from './Timer';
-import TimeList from './TimeList';
+
 import './style.css';
 
 const App = () => {
@@ -22,10 +22,8 @@ const App = () => {
     return (
         <div className={`${isLight ? "main-light" : "main-dark"}`}>
             <Hello title={title} />
-            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} />
-            <TimeList>
-                {timeArr}
-            </TimeList>
+            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} timeArr={timeArr} setTimeArr={setTimeArr} />
+           
         </div>
     );
 
