@@ -3,34 +3,16 @@ import Hello from './Hello';
 import Timer from './Timer';
 import './style.css';
 
-// class App extends Component {
-//     constructor () {
-//         super();
-
-//         this.state = {
-//             title: 'its a timer'
-//         }
-//     }
-    
-//     render() {
-//         return (
-//             <div className='main'>
-//                 <Hello title={this.title} />
-//                 <Timer /> 
-//             </div>
-//         );
-//     }
-// }
-
 const App = () => {
-    const [title, setTtitle] = useState('its a timer');
-    const handleSetTitle = () => {
-        setTtitle('welcome to my project');
+    const [title, setTitle] = useState('welcome to my project')
+    const [isLight, setIsLight] = useState(false);
+    const handleSetIsLight = () => {
+        setIsLight(!isLight);
     }
     return (
-        <div className='main'>
+        <div className={`${isLight ? "main-light" : "main-dark"}`}>
             <Hello title={title} />
-            <Timer handleSetTitle={handleSetTitle} /> 
+            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} /> 
         </div>
     );
 

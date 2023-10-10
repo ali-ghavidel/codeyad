@@ -3,7 +3,7 @@ body {
     padding: 0;
 }
 
-.main{
+.main-dark{
     width: 100%;
     height: 100vh;
     display: flex;
@@ -11,6 +11,16 @@ body {
     align-items: center;
     flex-direction: column;
     background-color: black;
+    color: chocolate;
+}
+.main-light{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
     color: chocolate;
 }
 
@@ -55,4 +65,12 @@ body {
 .white{
     background-color: white;
     color: black;
+}
+.black{
+    background-color: black;
+    color: white;
+}
+.gray{
+    background-color: gray;
+    color: white;
 }
