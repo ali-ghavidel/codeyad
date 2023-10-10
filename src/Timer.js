@@ -74,6 +74,9 @@ class Timer extends Component {
                     <button className='timerButtons_style warning' onClick={this.handleTimeRest}>
                       reset
                     </button>
+                    <button className='timerButtons_style white' onClick={this.props.handleSetTitle}>
+                      Test
+                    </button>
                   </div>
                 </Fragment>
               );
