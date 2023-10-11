@@ -3,6 +3,7 @@ import Hello from './Hello';
 import Timer from './Timer';
 
 import './style.css';
+import { TestContext } from './TestContext';
 
 const App = () => {
     const [title, setTitle] = useState('welcome to my project')
@@ -19,12 +20,17 @@ const App = () => {
     const handleSetIsLight = () => {
         setIsLight(!isLight);
     }
+    
     return (
-        <div className={`${isLight ? "main-light" : "main-dark"}`}>
-            <Hello title={title} />
-            <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} timeArr={timeArr} setTimeArr={setTimeArr} />
-           
-        </div>
+        <TestContext.Provider value={{
+            timeArr: timeArr,
+            setTimeArr: setTimeArr
+        }}>
+            <div className={`${isLight ? "main-light" : "main-dark"}`}>
+                <Hello title={title} />
+                <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} />
+            </div>
+        </TestContext.Provider>
     );
 
 }

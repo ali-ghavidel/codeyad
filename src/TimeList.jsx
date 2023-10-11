@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Item from './Item';
+import { TestContext } from './TestContext';
 const TimeList = (props) => {
+
+    const context = useContext(TestContext);
+
     return (
         <div className='timeList'>
-            {props.children.map((value, key) => {
+            {context.timeArr.map((value, key) => {
                 return (
                     <Item key={key}>
                         {value}
