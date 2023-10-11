@@ -77,4 +77,9 @@ body {
 }
 .laps {
     cursor: pointer;
+    background-color: wheat;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    margin: 0.5rem;
 }

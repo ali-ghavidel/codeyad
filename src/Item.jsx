@@ -6,9 +6,9 @@ const Item = (props) => {
 
     const context = useContext(TestContext)
 
-    const handleDeleteItem = () => {
+    const handleDeleteItem = (e) => {
         const contextFiltered = context.timeArr.filter((value) => {
-            return value !== props.children;
+            return value !== e.target.innerHTML;
         });
         context.setTimeArr(contextFiltered);
     }

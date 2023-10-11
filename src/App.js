@@ -4,11 +4,12 @@ import Timer from './Timer';
 
 import './style.css';
 import { TestContext } from './TestContext';
+import TimeList from './TimeList';
 
 const App = () => {
     const [title, setTitle] = useState('welcome to my project')
     const [isLight, setIsLight] = useState(false);
-    const [timeArr, setTimeArr] = useState(['00:06:35', '00:30:06']);
+    const [timeArr, setTimeArr] = useState(['00 : 06 : 35', '00 : 30 : 06']);
     useEffect(() => {
         //componentDidMout , if array filled + componentDidUpdate
         console.log('useEffect');
@@ -29,6 +30,7 @@ const App = () => {
             <div className={`${isLight ? "main-light" : "main-dark"}`}>
                 <Hello title={title} />
                 <Timer isLight={isLight} handleSetIsLight={handleSetIsLight} />
+                <TimeList />
             </div>
         </TestContext.Provider>
     );
