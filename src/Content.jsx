@@ -16,8 +16,9 @@ const Content = ()=>{
         console.log(showMenu);
     }
     return (
-        <div className={style.content_section} onClick={()=>setShowMenu(false)}>
-            <i className={`${style.menu_button} fas fa-bars text-dark m-2 pointer`} onClick={handleShowMenu}></i>
+        <div className={style.content_section} onClick={()=>setShowMenu(false)} style={!showMenu ? {} : {width: "calc(100% - 250px)"}} >
+            
+            <i className={`${style.menu_button} fas ${!showMenu ? "fa-bars" : "fa-times" } text-dark m-2 pointer`} onClick={handleShowMenu}></i>
             <Users/>
             <Posts/>
             <Gallery/>
