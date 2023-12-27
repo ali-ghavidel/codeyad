@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import style from './style.module.css';
 import { MainContext } from './context/MainContext';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ()=>{
 
@@ -18,16 +19,17 @@ const Sidebar = ()=>{
                     <img src="/assets/images/user2.jpg" alt="" />
                 </li>
                 <li>
-                    <a href="/">کاربران</a>
+                    {/* <a href="/">کاربران</a> */}
+                    <Link to={"/"} onClick={handleCloseMobile}>کاربران</Link>
                 </li>
                 <li>
-                    <a href="/">پست ها</a>
+                    <Link to="/posts" onClick={handleCloseMobile}>پست ها</Link>
                 </li>
                 <li>
-                    <a href="/">گالری</a>
+                    <Link to="/gallery" onClick={handleCloseMobile}>گالری</Link>
                 </li>
                 <li>
-                    <a href="/">کارها</a>
+                    <Link to="/todo" onClick={handleCloseMobile}>کارها</Link>
                 </li>
             </ul>
         </div>
