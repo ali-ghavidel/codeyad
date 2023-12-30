@@ -18,19 +18,27 @@ const Sidebar = ()=>{
                 <li className={style.sidebar_avatar}>
                     <img src="/assets/images/user2.jpg" alt="" />
                 </li>
-                <li>
-                    {/* <a href="/">کاربران</a> */}
-                    <Link to={"/"} onClick={handleCloseMobile}>کاربران</Link>
-                </li>
-                <li>
-                    <Link to="/posts" onClick={handleCloseMobile}>پست ها</Link>
-                </li>
-                <li>
-                    <Link to="/gallery" onClick={handleCloseMobile}>گالری</Link>
-                </li>
-                <li>
-                    <Link to="/todo" onClick={handleCloseMobile}>کارها</Link>
-                </li>
+                <Link to={"/user"} onClick={handleCloseMobile}>
+                    <li>
+                        {/* <a href="/">کاربران</a> */}
+                        کاربران
+                    </li>
+                </Link>
+                <Link to="/post" onClick={handleCloseMobile}>
+                    <li>
+                        پست ها
+                    </li>
+                </Link>
+                <Link to="/gallery" onClick={handleCloseMobile}>
+                    <li>
+                        گالری
+                    </li>
+                </Link>
+                <Link to="/todo" onClick={handleCloseMobile}>
+                    <li>
+                        کارها
+                    </li>
+                </Link>
             </ul>
         </div>
     )

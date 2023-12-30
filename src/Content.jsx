@@ -4,26 +4,33 @@ import Posts from './posts/Posts';
 import style from './style.module.css'
 import Todos from './todos/Todos';
 import Users from './users/Users';
+import Error404 from './Error404';
 import { MainContext } from './context/MainContext';
 import { Route, Routes } from 'react-router-dom';
+import AddUser from './users/AddUser';
+import EditDesc from './users/EditDesc';
 
 const Content = ()=>{
     const {showMenu, setShowMenu} = useContext(MainContext);
-
+    // const [isUser,setIsUser] = useState(false);
     const handleShowMenu = (event) => {
         event.stopPropagation();
         setShowMenu(!showMenu);
-        console.log(showMenu);
     }
     return (
         <div className={style.content_section} onClick={()=>setShowMenu(false)} style={!showMenu ? {} : {width: "calc(100% - 250px)"}} >
-            
             <i className={`${style.menu_button} fas ${!showMenu ? "fa-bars" : "fa-times" } text-dark m-2 pointer`} onClick={handleShowMenu}></i>
             <Routes>
+                {/* <Route path='/user' element={ isUser ? <Users/> : <Navigate replace to="/gallery" />} /> */}
                 <Route path='/' element={<Users/>} />
-                <Route path='/posts' element={<Posts/>} />
+                <Route path='/user' element={<Users/>} />
+                <Route path='/add' element={<AddUser/>} >
+                    <Route path=':userId' element={<EditDesc/>} />
+                </Route>
+                <Route path='/post' element={<Posts/>} />
                 <Route path='/gallery' element={<Gallery/>} />
                 <Route path='/todo' element={<Todos/>} />
+                <Route path='*' element={<Error404 />} />
             </Routes>
 
         </div>

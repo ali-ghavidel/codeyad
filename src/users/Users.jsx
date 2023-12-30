@@ -1,8 +1,17 @@
-import React from 'react';
-import style from '../style.module.css'
+import React, { useContext, useState } from 'react';
+import { UsersContext } from '../context/MainContext';
+import NewUserQuick from './NewUserQuick';
+import style from '../style.module.css';
+import { Link } from 'react-router-dom';
 
 const Users = ()=>{
+    const usersContext = useContext(UsersContext);
+    const [newUser, setNewUser] = useState(false);
+    // let counter = 1
 
+    const handleIsNewUser = () => {
+        setNewUser(!newUser);
+    }
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid`}>
             <h4 className="text-center">مدیریت کاربران</h4>
@@ -10,10 +19,22 @@ const Users = ()=>{
                 <div className="form-group col-10 col-md-6 col-lg-4">
                     <input type="text" className="form-control shadow" placeholder="جستجو"/>
                 </div>
-                <div className="col-2 text-start px-0">
-                    <button className="btn btn-success">
-                        <i className="fas fa-plus text-light"></i>
+                <div className="col-2 text-start px-0 d-flex">
+                    <Link to={'/add'}>
+                    <button className="btn btn-success mx-1">
+                        <i className="fas fa-plus text-light"></i> افزودن کاربر جدید
                     </button>
+                    </Link>
+                    {!newUser ?
+                        <button className="btn btn-success" onClick={handleIsNewUser}>
+                            <i className="fas fa-plus text-light"></i> افزودن سریع کاربر جدید
+                        </button>
+                        :
+                        <button className="btn btn-danger" onClick={handleIsNewUser}>
+                            <i className="fas fa-times text-light"></i> بستن
+                        </button>
+                    }
+                    
                 </div>
             </div>
             <table className="table bg-light shadow">
@@ -27,16 +48,23 @@ const Users = ()=>{
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>qasem</td>
-                        <td>qasemB</td>
-                        <td>mahdicmptr@gmail.com</td>
-                        <td>
-                            <i className="fas fa-edit text-warning mx-2 pointer"></i>
-                            <i className="fas fa-trash text-danger mx-2 pointer"></i>
-                        </td>
-                    </tr>
+                    
+                    {usersContext.users.map((value,key)=>{
+                        return(
+                           <tr key={key}>
+                                <td>{value.id}</td>
+                                <td>{value.name}</td>
+                                <td>{value.username}</td>
+                                <td>{value.email}</td>
+                                <td>
+                                    <i className="fas fa-edit text-warning mx-2 pointer"></i>
+                                    <i className="fas fa-trash text-danger mx-2 pointer"></i>
+                                </td>
+                            </tr> 
+                        )
+                    })}
+                    {newUser ? <NewUserQuick /> : ""}
+                    
                 </tbody>
             </table>
         </div>
