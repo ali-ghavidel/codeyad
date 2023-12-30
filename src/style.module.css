@@ -66,6 +66,10 @@ td , th {
 .menu_button__close{
     display: none;
 }
+.active_nav{
+    background-color: #fff !important;
+    color: #000;
+}
 
 @media(max-width:768px){
     .content_section{

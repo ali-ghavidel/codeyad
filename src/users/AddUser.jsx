@@ -1,16 +1,21 @@
 import React from 'react';
 
+
 import style from '../style.module.css'
-import { Outlet, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const AddUser = ()=>{
 
-    const params = useParams();
+    const {userId} = useParams();
     // console.log(params.userId);
+    const navigate = useNavigate();
+
+    const {state} = useLocation();
+    console.log(state);
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid container`}>
             <h4 className="text-center text-primary">
-               {params.userId ? "ویرایش کاربر" : "افزودن کاربر"}
+               {userId ? "ویرایش کاربر" : "افزودن کاربر"}
             </h4>
             <div className="row justify-content-center mt-5 ">
                 <form className="col-12 col-md-6 bg-light rounded shadow-lg p-3">
@@ -43,14 +48,14 @@ const AddUser = ()=>{
                     </div>
                     
                     <div className="col-12 text-start">
-                        <button type="button" className="btn btn-danger ms-2">بازگشت</button>
+                        <button type="button" className="btn btn-danger ms-2" onClick={()=>{navigate(-1)}}>بازگشت</button>
                         <button type="submit" className="btn btn-primary" >
-                            {params.userId ? "ویرایش" : "افزودن"}
+                            {userId ? "ویرایش" : "افزودن"}
                         </button>
                     </div>
                 </form>
             </div>
-            <Outlet />
+            {/* <Outlet /> */}
         </div>
     )
 }

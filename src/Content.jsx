@@ -8,7 +8,7 @@ import Error404 from './Error404';
 import { MainContext } from './context/MainContext';
 import { Route, Routes } from 'react-router-dom';
 import AddUser from './users/AddUser';
-import EditDesc from './users/EditDesc';
+
 
 const Content = ()=>{
     const {showMenu, setShowMenu} = useContext(MainContext);
@@ -24,8 +24,9 @@ const Content = ()=>{
                 {/* <Route path='/user' element={ isUser ? <Users/> : <Navigate replace to="/gallery" />} /> */}
                 <Route path='/' element={<Users/>} />
                 <Route path='/user' element={<Users/>} />
-                <Route path='/add' element={<AddUser/>} >
-                    <Route path=':userId' element={<EditDesc/>} />
+                <Route path='/user/add' element={<AddUser/>} >
+                    {/* <Route path=':userId' element={<EditDesc/>} /> */}
+                    <Route path=':userId' />
                 </Route>
                 <Route path='/post' element={<Posts/>} />
                 <Route path='/gallery' element={<Gallery/>} />

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import style from './style.module.css';
 import { MainContext } from './context/MainContext';
-import { Link } from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
 
 const Sidebar = ()=>{
 
@@ -18,27 +18,27 @@ const Sidebar = ()=>{
                 <li className={style.sidebar_avatar}>
                     <img src="/assets/images/user2.jpg" alt="" />
                 </li>
-                <Link to={"/user"} onClick={handleCloseMobile}>
+                <NavLink to={"/user"} className={({isActive})=>{ return isActive ? "active_nav" : ""}} onClick={handleCloseMobile}>
                     <li>
                         {/* <a href="/">کاربران</a> */}
                         کاربران
                     </li>
-                </Link>
-                <Link to="/post" onClick={handleCloseMobile}>
+                </NavLink>
+                <NavLink to="/post" className={({isActive})=>{ return isActive ? "active_nav" : ""}} onClick={handleCloseMobile}>
                     <li>
                         پست ها
                     </li>
-                </Link>
-                <Link to="/gallery" onClick={handleCloseMobile}>
+                </NavLink>
+                <NavLink to="/gallery" className={({isActive})=>{ return isActive ? "active_nav" : ""}} onClick={handleCloseMobile}>
                     <li>
                         گالری
                     </li>
-                </Link>
-                <Link to="/todo" onClick={handleCloseMobile}>
+                </NavLink>
+                <NavLink to="/todo" className={({isActive})=>{ return isActive ? "active_nav" : ""}} onClick={handleCloseMobile}>
                     <li>
                         کارها
                     </li>
-                </Link>
+                </NavLink>
             </ul>
         </div>
     )
