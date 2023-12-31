@@ -1,49 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
 import style from '../style.module.css'
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const AddUser = ()=>{
 
+    const [newUser, setNewUser] = useState({
+        name: "",
+        username: "",
+        email: "",
+        address: {
+        street: "",
+        suite: "",
+        city: "",
+        zipcode: ""
+        }
+    })
     const {userId} = useParams();
     // console.log(params.userId);
     const navigate = useNavigate();
 
-    const {state} = useLocation();
-    console.log(state);
+    // const {state} = useLocation();
+    // console.log(state);
+
+    const handleAddUser = (e)=> {
+        e.preventDefault();
+        axios.post('https://jsonplaceholder.typicode.com/users', newUser)
+        .then((res)=>{
+            if(res.status === 200 || res.status === 201){
+                swal("احسنت!", `${newUser.name} به عنوان کاربر جدید اضافه شد`, "success");
+            }else{
+                swal("اوپس!", "افزودن کاربر ناموفق بود", "error");
+            }
+        });
+    }
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid container`}>
             <h4 className="text-center text-primary">
                {userId ? "ویرایش کاربر" : "افزودن کاربر"}
             </h4>
             <div className="row justify-content-center mt-5 ">
-                <form className="col-12 col-md-6 bg-light rounded shadow-lg p-3">
+                <form onSubmit={handleAddUser} className="col-12 col-md-6 bg-light rounded shadow-lg p-3">
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">نام و نام خانوادگی</label>
-                        <input type="text" className="form-control"/>
+                        <label className="form-label">نام و نام خانوادگی</label>
+                        <input type="text" className="form-control" value={newUser.name} onChange={(e)=>setNewUser({...newUser, name: e.target.value })}/>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">نام کاربری</label>
-                        <input type="text" className="form-control"/>
+                        <label  className="form-label">نام کاربری</label>
+                        <input type="text" className="form-control" value={newUser.username} onChange={(e)=>setNewUser({...newUser, username: e.target.value })}/>
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="exampleInputEmail1" className="form-label">ایمیل</label>
-                        <input type="email" className="form-control"/>
+                        <label  className="form-label">ایمیل</label>
+                        <input type="email" className="form-control" value={newUser.email} onChange={(e)=>setNewUser({...newUser, email: e.target.value })}/>
                     </div>
                     <div className="mb-3 row">
-                        <label htmlFor="exampleInputEmail1" className="form-label">آدرس</label>
+                        <label className="form-label">آدرس</label>
                         <div className="col-6 my-1">
-                            <input type="text" className="form-control" placeholder="شهر"/>
+                            <input type="text" className="form-control" placeholder="شهر" value={newUser.address.city} onChange={(e)=>setNewUser({...newUser, address:{...newUser.address, city: e.target.value} })}/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" className="form-control" placeholder="خیابان"/>
+                            <input type="text" className="form-control" placeholder="خیابان" value={newUser.address.street} onChange={(e)=>setNewUser({...newUser, address: {...newUser.address, street: e.target.value}})}/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" className="form-control" placeholder="ادامه آدرس"/>
+                            <input type="text" className="form-control" placeholder="ادامه آدرس" value={newUser.address.suite} onChange={(e)=>setNewUser({...newUser, address: {...newUser.address, suite: e.target.value}})}/>
                         </div>
                         <div className="col-6 my-1">
-                            <input type="text" className="form-control" placeholder="کد پستی"/>
+                            <input type="text" className="form-control" placeholder="کد پستی" value={newUser.address.zipcode} onChange={(e)=>setNewUser({...newUser, address: {...newUser.address, zipcode: e.target.value}})}/>
                         </div>
                     </div>
                     
