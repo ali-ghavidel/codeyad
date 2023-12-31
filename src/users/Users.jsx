@@ -1,14 +1,20 @@
-import React, { useContext, useState } from 'react';
-import { UsersContext } from '../context/MainContext';
+import React, { useEffect, useState } from 'react';
 import NewUserQuick from './NewUserQuick';
 import style from '../style.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
-
+import axios from 'axios';
 
 const Users = ()=>{
-    const usersContext = useContext(UsersContext);
     const [newUser, setNewUser] = useState(false);
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
+            setUsers(res.data);
+        }).catch((err)=>{return err})
+    }, []);
+
     // let counter = 1
     const navigator = useNavigate();
 
@@ -62,6 +68,7 @@ const Users = ()=>{
                     
                 </div>
             </div>
+            {users ?
             <table className="table bg-light shadow">
                 <thead>
                     <tr>
@@ -74,9 +81,9 @@ const Users = ()=>{
                 </thead>
                 <tbody>
                     
-                    {usersContext.users.map((value,key)=>{
+                    {users.map((value,key)=>{
                         return(
-                           <tr key={key}>
+                        <tr key={key}>
                                 <td>{value.id}</td>
                                 <td>{value.name}</td>
                                 <td>{value.username}</td>
@@ -92,6 +99,10 @@ const Users = ()=>{
                     
                 </tbody>
             </table>
+            :
+            <h1>لطفا شکیبا باشید</h1>
+            }
+            
         </div>
     )
 
