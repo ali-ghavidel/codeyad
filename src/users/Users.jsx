@@ -13,7 +13,29 @@ const Users = ()=>{
         axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
             setUsers(res.data);
         }).catch((err)=>{return err})
+
+        // const func = () =>{
+        //     return new Promise((resolve, reject)=>{
+        //         console.log(1);
+    
+        //         setTimeout(() => {
+        //             console.log(2);
+        //             resolve(true);
+        //         }, 1000);
+        //     })
+        // }
+        
+        // const test = async () =>{
+        //     const res = await func();
+        //     if(res)
+        //     console.log(3);
+        // }
+        // test();
+
+        
     }, []);
+    
+    
 
     // let counter = 1
     const navigator = useNavigate();
