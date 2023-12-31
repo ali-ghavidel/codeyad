@@ -13,26 +13,6 @@ const Users = ()=>{
         axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
             setUsers(res.data);
         }).catch((err)=>{return err})
-
-        // const func = () =>{
-        //     return new Promise((resolve, reject)=>{
-        //         console.log(1);
-    
-        //         setTimeout(() => {
-        //             console.log(2);
-        //             resolve(true);
-        //         }, 1000);
-        //     })
-        // }
-        
-        // const test = async () =>{
-        //     const res = await func();
-        //     if(res)
-        //     console.log(3);
-        // }
-        // test();
-
-        
     }, []);
     
     
@@ -44,22 +24,35 @@ const Users = ()=>{
         setNewUser(!newUser);
     }
 
-    const handleDeleteUser = () => {
+    const handleDeleteUser = (id, email) => {
         swal({
             title: "حذف کاربر",
-            text: "آیا از حذف این کاربر مطمئن هستید؟",
+            text: `آیا از حذف کاربر با ایمیل ${email} مطمئن هستید؟`,
             icon: "warning",
             buttons: ["خیر", "بله"],
             dangerMode: true,
           })
           .then((willDelete) => {
             if (willDelete) {
-              swal("کاربر با موفقیت حذف شد", {
-                icon: "success",
-                buttons: "حله"
-              });
+                axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+                .then((res)=>{
+                    if(res.status === 200){
+                        const newUsers = users.filter((v)=>v.id !== id);
+                        setUsers(newUsers);
+                        swal("کاربر با موفقیت حذف شد", {
+                            icon: "success",
+                            buttons: "حله"
+                        });
+                    }else{
+                        swal("خطایی رخ داد", {
+                            icon: "error",
+                            buttons: "حله"
+                        });
+                    }
+                })
+              
             } else {
-              swal("کاربر حذف نشد", {
+              swal("درخواست توسط شما لغو شد", {
                 buttons: "حله"
               });
             }
@@ -112,7 +105,7 @@ const Users = ()=>{
                                 <td>{value.email}</td>
                                 <td>
                                     <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigator(`/user/add/${value.id}`, {state: {id: value.id, name:value.name}})}></i>
-                                    <i className="fas fa-trash text-danger mx-2 pointer" onClick={handleDeleteUser}></i>
+                                    <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handleDeleteUser(value.id, value.email)}></i>
                                 </td>
                             </tr> 
                         )
