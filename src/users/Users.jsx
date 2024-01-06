@@ -3,32 +3,35 @@ import NewUserQuick from './NewUserQuick';
 import style from '../style.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
-import axios from 'axios';
+import { deleteUserService, getAllUsersSErvice } from '../services/UserServices';
+import Loading from '../services/Loading';
 
 const Users = ()=>{
     const [newUser, setNewUser] = useState(false);
     const [users, setUsers] = useState([]);
-    const [altUsers, setAltUsers] = useState([]);
+    const [mainUsers, setMainUsers] = useState([]);
 
+    
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
-            setUsers(res.data);
-            setAltUsers(res.data);
-        }).catch((err)=>{return err})
+       getAllUsersSErvice(setUsers, setMainUsers);
+    //    console.log("users: " +users);
+       
     }, []);
     
     
 
     // let counter = 1
     const navigator = useNavigate();
-
+    // console.log("user[0]: " +users[0].name);
     const handleIsNewUser = () => {
         setNewUser(!newUser);
     }
 
     const handleSearchUser = (e) => {
-        setUsers(altUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
+        setUsers(mainUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
     }
+
+    
     const handleDeleteUser = (id, email) => {
         swal({
             title: "حذف کاربر",
@@ -39,22 +42,7 @@ const Users = ()=>{
           })
           .then((willDelete) => {
             if (willDelete) {
-                axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
-                .then((res)=>{
-                    if(res.status === 200){
-                        const newUsers = users.filter((v)=>v.id !== id);
-                        setUsers(newUsers);
-                        swal("کاربر با موفقیت حذف شد", {
-                            icon: "success",
-                            buttons: "حله"
-                        });
-                    }else{
-                        swal("خطایی رخ داد", {
-                            icon: "error",
-                            buttons: "حله"
-                        });
-                    }
-                })
+                deleteUserService(id, users, setUsers)
               
             } else {
               swal("درخواست توسط شما لغو شد", {
@@ -120,7 +108,7 @@ const Users = ()=>{
                 </tbody>
             </table>
             :
-            <h1>لطفا شکیبا باشید</h1>
+            <Loading />
             }
             
         </div>

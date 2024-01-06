@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import style from '../style.module.css'
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import swal from 'sweetalert';
+import { addUserService, getUserByIdService, updateUserService } from '../services/UserServices';
 
 const AddUser = ()=>{
 
@@ -26,47 +25,24 @@ const AddUser = ()=>{
     // const {state} = useLocation();
     // console.log(state);
 
+    
+
     useEffect(() => {
-        if(userId){
-            axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`).then((res)=>{
-                setNewUser({
-                    name: res.data.name,
-                    username: res.data.username,
-                    email: res.data.email,
-                    address: {
-                    street: res.data.address.street,
-                    suite: res.data.address.suite,
-                    city: res.data.address.city,
-                    zipcode: res.data.address.zipcode
-                    }
-                })
-            })
+         if(userId){
+            getUserByIdService(setNewUser, userId);
         }
     }, [userId]);
+
+   
     const handleAddUser = (e)=> {
         e.preventDefault();
         if(!userId){
-            axios.post('https://jsonplaceholder.typicode.com/users', newUser)
-            .then((res)=>{
-                if(res.status === 200 || res.status === 201){
-                    swal("احسنت!", `${newUser.name} به عنوان کاربر جدید اضافه شد`, "success");
-                }else{
-                    swal("اوپس!", "افزودن کاربر ناموفق بود", "error");
-                }
-            });
+            addUserService(newUser);
         }else{
-            axios.put(`https://jsonplaceholder.typicode.com/users/${userId}`, newUser)
-            .then((res)=>{
-                console.log(res);
-                if(res.status === 200 || res.status === 201){
-                    swal("احسنت!", `اطلاعات کاربر ${newUser.name} ویرایش شد`, "success");
-                }else{
-                    swal("اوپس!", "ویرایش کاربر ناموفق بود", "error");
-                }
-            })
+            updateUserService(userId, newUser);
         }
-        
     }
+
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid container`}>
             <h4 className="text-center text-primary">
