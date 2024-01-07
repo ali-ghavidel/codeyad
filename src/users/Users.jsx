@@ -10,6 +10,7 @@ const Users = ()=>{
     const [newUser, setNewUser] = useState(false);
     const [users, setUsers] = useState([]);
 <<<<<<< HEAD
+<<<<<<< HEAD
     const [mainUsers, setMainUsers] = useState([]);
 =======
 >>>>>>> parent of 9f932cb (part#40)
@@ -25,6 +26,15 @@ const Users = ()=>{
             setUsers(res.data);
         }).catch((err)=>{return err})
 >>>>>>> parent of 9f932cb (part#40)
+=======
+    const [mainUsers, setMainUsers] = useState([]);
+
+    
+    useEffect(() => {
+       getAllUsersSErvice(setUsers, setMainUsers);
+    //    console.log("users: " +users);
+       
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     }, []);
     
     
@@ -42,8 +52,11 @@ const Users = ()=>{
     }
 
     
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 9f932cb (part#40)
+=======
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     const handleDeleteUser = (id, email) => {
         swal({
             title: "حذف کاربر",

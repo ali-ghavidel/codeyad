@@ -1,12 +1,20 @@
+<<<<<<< HEAD
 import React, { useCallback, useEffect } from 'react';
+=======
+import React, { useCallback } from 'react';
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
 import { Link } from 'react-router-dom';
 import MyPagination from '../pagination/MyPagination';
 // import style from '../style.module.css';
 
 const Photos = ({photos, mainPhotos, current, setPage, total}) => {
+<<<<<<< HEAD
     useEffect(()=>{
         setPage(1);
     },[setPage, photos])
+=======
+    
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     const onChangePage = useCallback((current)=>{
         setPage(current);
     },[setPage])

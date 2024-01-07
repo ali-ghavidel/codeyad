@@ -26,6 +26,9 @@ const AddUser = ()=>{
     // console.log(state);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     
 
     useEffect(() => {
@@ -42,6 +45,7 @@ const AddUser = ()=>{
         }else{
             updateUserService(userId, newUser);
         }
+<<<<<<< HEAD
 =======
     const handleAddUser = (e)=> {
         e.preventDefault();
@@ -54,6 +58,8 @@ const AddUser = ()=>{
             }
         });
 >>>>>>> parent of 9f932cb (part#40)
+=======
+>>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     }
 
     return (
