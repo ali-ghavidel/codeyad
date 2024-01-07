@@ -5,6 +5,6 @@ export const MainContext = createContext({
     setShowMenu: ()=>{}
 });
 export const UsersContext = createContext({
-    users: [],
-    setUsers: ()=>{}
+    currentUser: [],
+    setCurrentUser: ()=>{}
 });
