@@ -3,60 +3,32 @@ import NewUserQuick from './NewUserQuick';
 import style from '../style.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
-import { deleteUserService, getAllUsersSErvice } from '../services/UserServices';
-import Loading from '../services/Loading';
+import axios from 'axios';
 
 const Users = ()=>{
     const [newUser, setNewUser] = useState(false);
     const [users, setUsers] = useState([]);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const [mainUsers, setMainUsers] = useState([]);
-=======
->>>>>>> parent of 9f932cb (part#40)
+    const [altUsers, setAltUsers] = useState([]);
 
-    
     useEffect(() => {
-<<<<<<< HEAD
-       getAllUsersSErvice(setUsers, setMainUsers);
-    //    console.log("users: " +users);
-       
-=======
         axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
             setUsers(res.data);
+            setAltUsers(res.data);
         }).catch((err)=>{return err})
->>>>>>> parent of 9f932cb (part#40)
-=======
-    const [mainUsers, setMainUsers] = useState([]);
-
-    
-    useEffect(() => {
-       getAllUsersSErvice(setUsers, setMainUsers);
-    //    console.log("users: " +users);
-       
->>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     }, []);
     
     
 
     // let counter = 1
     const navigator = useNavigate();
-    // console.log("user[0]: " +users[0].name);
+
     const handleIsNewUser = () => {
         setNewUser(!newUser);
     }
 
-<<<<<<< HEAD
     const handleSearchUser = (e) => {
-        setUsers(mainUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
+        setUsers(altUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
     }
-
-    
-<<<<<<< HEAD
-=======
->>>>>>> parent of 9f932cb (part#40)
-=======
->>>>>>> 3a706b1221e138afb4f36adf681c92c6dd0381d6
     const handleDeleteUser = (id, email) => {
         swal({
             title: "حذف کاربر",
@@ -67,7 +39,22 @@ const Users = ()=>{
           })
           .then((willDelete) => {
             if (willDelete) {
-                deleteUserService(id, users, setUsers)
+                axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+                .then((res)=>{
+                    if(res.status === 200){
+                        const newUsers = users.filter((v)=>v.id !== id);
+                        setUsers(newUsers);
+                        swal("کاربر با موفقیت حذف شد", {
+                            icon: "success",
+                            buttons: "حله"
+                        });
+                    }else{
+                        swal("خطایی رخ داد", {
+                            icon: "error",
+                            buttons: "حله"
+                        });
+                    }
+                })
               
             } else {
               swal("درخواست توسط شما لغو شد", {
@@ -81,7 +68,7 @@ const Users = ()=>{
             <h4 className="text-center">مدیریت کاربران</h4>
             <div className="row my-2 mb-4 justify-content-between w-100 mx-0">
                 <div className="form-group col-10 col-md-6 col-lg-4">
-                    <input type="text" className="form-control shadow" placeholder="جستجو"/>
+                    <input type="text" className="form-control shadow" placeholder="جستجو" onChange={handleSearchUser}/>
                 </div>
                 <div className="col-2 text-start px-0 d-flex">
                     <Link to={'/user/add'} state={{id: 2, name: "reza"}}>
@@ -122,7 +109,7 @@ const Users = ()=>{
                                 <td>{value.username}</td>
                                 <td>{value.email}</td>
                                 <td>
-                                    <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigator(`/user/add/${value.id}`, {state: {id: value.id, name:value.name}})}></i>
+                                    <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigator(`/user/add/${value.id}`)}></i>
                                     <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handleDeleteUser(value.id, value.email)}></i>
                                 </td>
                             </tr> 
@@ -133,7 +120,7 @@ const Users = ()=>{
                 </tbody>
             </table>
             :
-            <Loading />
+            <h1>لطفا شکیبا باشید</h1>
             }
             
         </div>
