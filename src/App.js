@@ -3,6 +3,7 @@ import Content from './Content';
 import Sidebar from './Sidebar';
 import { MainContext, UsersContext } from './context/MainContext';
 import {BrowserRouter} from 'react-router-dom';
+import Portal from './Portal';
 
 
 
@@ -42,6 +43,7 @@ const App = ()=>{
             <BrowserRouter>
                 <MainContext.Provider value={{showMenu, setShowMenu}}>
                     <UsersContext.Provider value={{currentUser, setCurrentUser}}>
+                        <Portal/>
                         <Sidebar/>
                         <Content/>
                     </UsersContext.Provider>
