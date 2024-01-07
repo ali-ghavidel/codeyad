@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
 import style from '../style.module.css'
@@ -25,6 +25,7 @@ const AddUser = ()=>{
     // const {state} = useLocation();
     // console.log(state);
 
+<<<<<<< HEAD
     
 
     useEffect(() => {
@@ -41,6 +42,18 @@ const AddUser = ()=>{
         }else{
             updateUserService(userId, newUser);
         }
+=======
+    const handleAddUser = (e)=> {
+        e.preventDefault();
+        axios.post('https://jsonplaceholder.typicode.com/users', newUser)
+        .then((res)=>{
+            if(res.status === 200 || res.status === 201){
+                swal("احسنت!", `${newUser.name} به عنوان کاربر جدید اضافه شد`, "success");
+            }else{
+                swal("اوپس!", "افزودن کاربر ناموفق بود", "error");
+            }
+        });
+>>>>>>> parent of 9f932cb (part#40)
     }
 
     return (

@@ -9,13 +9,22 @@ import Loading from '../services/Loading';
 const Users = ()=>{
     const [newUser, setNewUser] = useState(false);
     const [users, setUsers] = useState([]);
+<<<<<<< HEAD
     const [mainUsers, setMainUsers] = useState([]);
+=======
+>>>>>>> parent of 9f932cb (part#40)
 
     
     useEffect(() => {
+<<<<<<< HEAD
        getAllUsersSErvice(setUsers, setMainUsers);
     //    console.log("users: " +users);
        
+=======
+        axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
+            setUsers(res.data);
+        }).catch((err)=>{return err})
+>>>>>>> parent of 9f932cb (part#40)
     }, []);
     
     
@@ -27,11 +36,14 @@ const Users = ()=>{
         setNewUser(!newUser);
     }
 
+<<<<<<< HEAD
     const handleSearchUser = (e) => {
         setUsers(mainUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
     }
 
     
+=======
+>>>>>>> parent of 9f932cb (part#40)
     const handleDeleteUser = (id, email) => {
         swal({
             title: "حذف کاربر",
@@ -56,7 +68,7 @@ const Users = ()=>{
             <h4 className="text-center">مدیریت کاربران</h4>
             <div className="row my-2 mb-4 justify-content-between w-100 mx-0">
                 <div className="form-group col-10 col-md-6 col-lg-4">
-                    <input type="text" className="form-control shadow" placeholder="جستجو" onChange={handleSearchUser}/>
+                    <input type="text" className="form-control shadow" placeholder="جستجو"/>
                 </div>
                 <div className="col-2 text-start px-0 d-flex">
                     <Link to={'/user/add'} state={{id: 2, name: "reza"}}>
@@ -97,7 +109,7 @@ const Users = ()=>{
                                 <td>{value.username}</td>
                                 <td>{value.email}</td>
                                 <td>
-                                    <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigator(`/user/add/${value.id}`)}></i>
+                                    <i className="fas fa-edit text-warning mx-2 pointer" onClick={()=>navigator(`/user/add/${value.id}`, {state: {id: value.id, name:value.name}})}></i>
                                     <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handleDeleteUser(value.id, value.email)}></i>
                                 </td>
                             </tr> 
