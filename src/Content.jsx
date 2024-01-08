@@ -12,6 +12,7 @@ import UserPosts from './posts/UserPosts';
 import AddPost from './posts/AddPost';
 import Photo from './gallery/Photo';
 import AddTodos from './todos/AddTodos';
+import Comments from './comments/Comments';
 
 
 
@@ -36,6 +37,9 @@ const Content = ()=>{
                 </Route>
                 <Route path='/post' element={<Posts/>} />
                 <Route path='/post/add' element={<AddPost/>} >
+                    <Route path=':postId' />
+                </Route>
+                <Route path='/post/comments' element={<Comments/>}>
                     <Route path=':postId' />
                 </Route>
                 <Route path='/user/post/:userId' element={<UserPosts/>} />

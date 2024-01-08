@@ -93,6 +93,9 @@ const Posts = ()=>{
                                         <i className="fas fa-edit text-warning mx-2 cursor-not-allowed" ></i>
                                         }
                                         <i className="fas fa-trash text-danger mx-2 pointer" onClick={()=>handleDeletePost(post.id, post.title)} ></i>
+                                        <Link to={`/post/comments/${post.id}`}>
+                                        <i className="fas fa-comment text-info mx-2 pointer" ></i>
+                                        </Link>
                                     </td>
                                 </tr> 
                             )
