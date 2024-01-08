@@ -1,0 +1,185 @@
+ul{
+    list-style: none;
+}
+
+a{
+    text-decoration: none !important;
+    color: unset !important;
+}
+li:hover,a:hover{
+    color: #1e50ff !important;
+}
+a:active{
+    color: red !important;
+}
+td , th {
+    text-align: center !important;
+}
+
+.sidebar_section{
+    position: fixed;
+    background: linear-gradient(#12382881 , #3a2a2a7a , #0b2b3a42) , url(./assets/images/sideBack3.jpg) no-repeat;
+    background-size: cover;
+    color: white;
+    width: 250px;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    display: block;
+    transition: all 500ms ease;
+    z-index: 999;
+}
+
+.sidebar_avatar{
+    margin-top: 2rem;
+    text-align: center;
+    padding: 0.3rem 0.5rem !important;
+}
+
+.sidebar_avatar img{
+    max-width: 75px;
+    border-radius: 50%;
+}
+.sidebar_list li{
+    padding: 0.3rem 1rem;
+    transition: all 300ms ease;
+}
+.sidebar_list li:not(.sidebar_avatar):hover{
+    padding: 0.3rem 1rem;
+    background: #ebe6e681;
+}
+
+
+/* content section  */
+.content_section{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+    background: url('./assets/images/body_back7.jpg');
+    transition: all 500ms ease;
+}
+
+.menu_button{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    z-index: 1000;
+}
+.menu_button__close{
+    display: none;
+}
+.active_nav{
+    background-color: #fff !important;
+    color: #000;
+}
+
+@media(max-width:768px){
+    .content_section{
+        width: 100%;
+    }
+    .sidebar_section{
+        /* right: 0; */
+        min-width: 100%;
+    }
+    .sidebar_section.active{
+        right: 0;
+    }
+    .menu_button__close{
+        display: block;
+        position: absolute;
+        top: 7px;
+        left: 7px;
+        z-index: 1000;
+        font-size: 2rem;
+    }
+}
+
+
+/* users content ----------- */
+
+/* posts content ------------ */
+.paginate {
+    display: flex;
+    font-family: sans-serif;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .pagination {
+    list-style: none;
+    height: 31.5px;
+    width: 31.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: #1e50ff;
+    border-radius: 50%;
+  }
+  
+  .pageItem {
+    list-style: none;
+    padding: 2px 12px;
+    height: 31.5px;
+    width: 31.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2px;
+  }
+  .newPost {
+    background-color: white;
+    width: 50%;
+    border-radius: 1rem;
+    box-shadow: 3px 3px 4px 5px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    margin: 2em auto;
+  }
+  .label{
+    color: #1e50ff;
+  }
+
+  /* gallery ........... */
+
+  .album{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: gray;
+    border-radius: .5rem;
+    box-shadow: 1px 1px 2px 4px #0b2b3a42;
+  }
+  .photosGrid {
+    display: flex;
+    
+  }
+
+  /* modals */
+
+  .modalBase{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #00000085;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modalBase .modalBox{
+    width: 50%;
+    height: 50%;
+    background-color: #fff;
+    border-radius: 2rem;
+    padding: 1rem;
+    color: #000;
+  }
