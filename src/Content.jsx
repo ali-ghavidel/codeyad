@@ -8,6 +8,7 @@ import Error404 from './Error404';
 import { MainContext } from './context/MainContext';
 import { Route, Routes } from 'react-router-dom';
 import AddUser from './users/AddUser';
+import Test from './HOC/Test';
 
 
 const Content = ()=>{
@@ -22,8 +23,8 @@ const Content = ()=>{
             <i className={`${style.menu_button} fas ${!showMenu ? "fa-bars" : "fa-times" } text-dark m-2 pointer`} onClick={handleShowMenu}></i>
             <Routes>
                 {/* <Route path='/user' element={ isUser ? <Users/> : <Navigate replace to="/gallery" />} /> */}
-                <Route path='/' element={<Users/>} />
-                <Route path='/user' element={<Users/>} />
+                <Route path='/' element={<Test render={(Confirm, Alert)=><Users Confirm={Confirm} Alert={Alert}/>} />} />
+                <Route path='/user' element={<Test render={(Confirm, Alert)=><Users Confirm={Confirm} Alert={Alert}/>} />} />
                 <Route path='/user/add' element={<AddUser/>} >
                     {/* <Route path=':userId' element={<EditDesc/>} /> */}
                     <Route path=':userId' />

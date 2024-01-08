@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import NewUserQuick from './NewUserQuick';
 import style from '../style.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
+
 import axios from 'axios';
 
-const Users = ()=>{
+
+const Users = (props)=>{
     const [newUser, setNewUser] = useState(false);
     const [users, setUsers] = useState([]);
     const [altUsers, setAltUsers] = useState([]);
-
+    const {Confirm, Alert} = props;
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/users').then((res)=>{
             setUsers(res.data);
@@ -29,39 +29,24 @@ const Users = ()=>{
     const handleSearchUser = (e) => {
         setUsers(altUsers.filter((u)=>u.name.toLowerCase().includes(e.target.value.toLowerCase())));
     }
-    const handleDeleteUser = (id, email) => {
-        swal({
-            title: "حذف کاربر",
-            text: `آیا از حذف کاربر با ایمیل ${email} مطمئن هستید؟`,
-            icon: "warning",
-            buttons: ["خیر", "بله"],
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
+    const handleDeleteUser = async (id, email) => {
+        
+            if (await Confirm("حذف کاربر", `آیا از حذف کاربر با ایمیل ${email} مطمئن هستید؟`, "warning", ["خیر", "بله"])) {
                 axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
                 .then((res)=>{
                     if(res.status === 200){
                         const newUsers = users.filter((v)=>v.id !== id);
                         setUsers(newUsers);
-                        swal("کاربر با موفقیت حذف شد", {
-                            icon: "success",
-                            buttons: "حله"
-                        });
+                        Alert("کاربر با موفقیت حذف شد", "success")
                     }else{
-                        swal("خطایی رخ داد", {
-                            icon: "error",
-                            buttons: "حله"
-                        });
+                        Alert("خطایی رخ داد", "error")
                     }
                 })
               
             } else {
-              swal("درخواست توسط شما لغو شد", {
-                buttons: "حله"
-              });
+              Alert("درخواست توسط شما لغو شد", "info");
             }
-          });
+          
     }
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid`}>
@@ -89,7 +74,7 @@ const Users = ()=>{
                 </div>
             </div>
             {users ?
-            <table className="table bg-light shadow">
+            <table className="table bg-light shadow table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -115,7 +100,7 @@ const Users = ()=>{
                             </tr> 
                         )
                     })}
-                    {newUser ? <NewUserQuick /> : ""}
+                    
                     
                 </tbody>
             </table>
