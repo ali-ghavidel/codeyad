@@ -12,6 +12,7 @@ const Posts = ()=>{
 
     const [mainPosts, setMainPosts] = useState([]);
     const [posts, setPosts] = useState([]);
+    const [uId , setUId] = useState("");
     const [page, setPage] = useState(0);
     const [total, setTotal] = useState(0);
     const {userId} = useParams();
@@ -21,6 +22,9 @@ const Posts = ()=>{
             getAllPostsService(setPosts, setMainPosts, page, setTotal);
     },[page,userId,setPosts]);
 
+    useEffect(()=>{
+        handleSearchInput();
+    },[uId])
     const handleChangePage = useCallback((page)=> {
         setPage(page);
     },[])
@@ -43,15 +47,15 @@ const Posts = ()=>{
           });
         
     }
-    const handleSearchInput = (e) => {
-        setPosts(mainPosts.filter((v)=> v.title.toLowerCase().includes(e.target.value.toLowerCase()) ));
+    const handleSearchInput = () => {
+        uId > 0 ? setPosts(mainPosts.filter((v)=> Number(v.id) === Number(uId)) ) : setPosts(mainPosts)
     }
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid`}>
             <h4 className="text-center">مدیریت پست ها</h4>
             <div className="row my-2 mb-4 justify-content-between w-100 mx-0">
                 <div className="form-group col-10 col-md-6 col-lg-4">
-                    <input type="text" className="form-control shadow" placeholder="جستجو" onChange={handleSearchInput}/>
+                    <input type="number" className="form-control shadow" placeholder="جستجو" value={uId} onChange={(e)=>setUId(e.target.value)}/>
                 </div>
                 <div className="col-2 text-start px-0 d-flex">
                    
@@ -80,7 +84,7 @@ const Posts = ()=>{
                         {posts.map((post, key)=>{
                             return(
                                 <tr key={key}>
-                                    <td>{post.id}</td>
+                                    <td className='pointer text-info' onClick={()=>setUId(post.id)}>{post.id}</td>
                                     <td>{post.title.length > 31 ? post.title.substr(0,30)+"..." : post.title}</td>
                                     <td>{post.body.substr(0,50)}...</td>
                                     <td><Link to={`/user/add/${post.userId}`}>{post.author}</Link></td>

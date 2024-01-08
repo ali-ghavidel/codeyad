@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useReducer, useState } from 'react';
 import style from '../style.module.css'
 import { Link } from 'react-router-dom';
 import MyPagination from '../pagination/MyPagination';
@@ -8,8 +8,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import swal from 'sweetalert';
 import { deleteTodoService, getAllUsers, getUserTodosService } from '../services/TodoServices';
 
+const init = {
+    val1: 0,
+    val2: 5
+}
+const reducer = (state, action) => {
+    switch (action.type) {
+        case 'increament':
+            return {...state, val1: state.val1 + action.value};
+            
+        case 'decreament':
+            return {...state, val1: state.val1 - action.value};
+            
+        case 'increament2':
+            return {...state, val2: state.val2 + action.value};
+            
+        case 'decreament2':
+            return {...state, val2: state.val2 - action.value};
+            
+        case 'reset':
+            return init;
+            
+        default:
+            return state
+    }
+}
 const Todos = ()=>{
 
+    const [counter, dispatch] = useReducer(reducer, init);
     const [users, setUsers] = useState([]);
     const [id,setId] = useState(0);
     const [todos, setTodos] = useState([]);
@@ -50,6 +76,20 @@ const Todos = ()=>{
     return (
         <div className={`${style.item_content} mt-5 p-4 container-fluid`}>
             <h4 className="text-center">مدیریت کار ها</h4>
+            <h1 className='text-center mb-3'>{counter.val1}</h1>
+            <h1 className='text-center mb-3'>{counter.val2}</h1>
+            <div className='text-center mb-3'>
+                <button className='btn btn-success' onClick={()=>dispatch({type: 'increament', value: 1})}>inc</button>
+                <button className='btn btn-danger' onClick={()=>dispatch({type: 'decreament', value: 1})}>dec</button>
+            </div>
+            <div className='text-center mb-3'>
+                <button className='btn btn-success' onClick={()=>dispatch({type: 'increament2', value: 5})}>inc2</button>
+                <button className='btn btn-danger' onClick={()=>dispatch({type: 'decreament2', value: 5})}>dec2</button>
+            </div>
+            <div className='text-center mb-3'>
+                <button className='btn btn-info' onClick={()=>dispatch({type: 'reset'})}>reset</button>
+            </div>
+            
             <div className="row my-2 mb-4 justify-content-between w-100 mx-0">
                 <div className="form-group col-10 col-md-6 col-lg-4">
                     <input type="text" className="form-control shadow" placeholder="جستجو" onChange={handleSearchInput} />
