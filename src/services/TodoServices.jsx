@@ -1,10 +1,22 @@
 import swal from "sweetalert";
 import JPService from "../JPService"
 
+export const getAllUsers2 = async ( dispatch )=> {
+    const res = await JPService.get('users');
+    try {
+        // dispatch(res.data);  
+        dispatch({act:"getUsers", value:res.data});  
+    } catch (error) {
+        console.log(error);
+    }
+    
+}
 export const getAllUsers = async ( setUsers )=> {
     const res = await JPService.get('users');
     try {
-        setUsers(res.data);    
+        // dispatch(res.data);  
+        // dispatch({act:"getUsers", value:res.data});  
+        setUsers(res.data);
     } catch (error) {
         console.log(error);
     }
@@ -54,10 +66,11 @@ export const addNewTodo = async (todo) => {
         console.log(error);
     }
 }
-export const getTodoInfo = async (setTodo, todoId) => {
+export const getTodoInfo = async (dispatch, todoId) => {
     const res = await JPService.get(`todos/${todoId}`);
     try {
-        setTodo(res.data);
+        // setTodo(res.data);
+        dispatch({act: "getTodo", value: res.data});
     } catch (error) {
         console.log(error);
     }
