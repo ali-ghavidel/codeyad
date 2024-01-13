@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+
+        }
+        h1 {
+            color: blue;
+            text-align: center;
+        }
+        h4 {
+            color: green;
+            text-align: center;
+        }
+        button {
+            background-color: red;
+            color: wheat;
+            text-align: center;
+            margin:  0 auto;
+            border: none;
+            padding: 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>فروشگاه</h1>
+    <h4>تعداد سیب ها: <span id="apples">خالی</span></h4>
+    <button id="purchase">خرید سیب</button>
+</body>
+
+<script src="redux.js"></script>
+<script>
+    
+
+const states = {
+    apple: 5
+}
+
+const reducer = (state = states, action) => {
+    switch (action.type) {
+        case "buy-apple":
+            return {apple: state.apple - 1}
+        default:
+            return state
+    }
+}
+
+const store = Redux.createStore(reducer);
+
+store.subscribe(()=>{
+    document.getElementById("apples").innerHTML = store.getState().apple;
+})
+
+document.getElementById("purchase").addEventListener('click', ()=>{
+    store.dispatch({type: "buy-apple"});
+})
+document.getElementById("apples").innerHTML = store.getState().apple;
+</script>
+</html>
