@@ -19,7 +19,7 @@
             text-align: center;
         }
         button {
-            background-color: red;
+            background-color: green;
             color: wheat;
             text-align: center;
             margin:  0 auto;
@@ -34,35 +34,17 @@
 <body>
     <h1>فروشگاه</h1>
     <h4>تعداد سیب ها: <span id="apples">خالی</span></h4>
-    <button id="purchase">خرید سیب</button>
+    <button id="purchase-apple">خرید سیب</button>
+
+    <h4>تعداد پرتقال ها: <span id="oranges">خالی</span></h4>
+    <button id="purchase-orange">خرید پرتقال</button>
+
+    <h4>تعداد ساندویچ ها: <span id="sandwitches">خالی</span></h4>
+    <button id="purchase-sandwitch">خرید ساندویچ</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/5.0.0-alpha.0/redux.min.js"></script>
+<script src="app.js"></script>
 </body>
 
-<script src="redux.js"></script>
-<script>
-    
 
-const states = {
-    apple: 5
-}
-
-const reducer = (state = states, action) => {
-    switch (action.type) {
-        case "buy-apple":
-            return {apple: state.apple - 1}
-        default:
-            return state
-    }
-}
-
-const store = Redux.createStore(reducer);
-
-store.subscribe(()=>{
-    document.getElementById("apples").innerHTML = store.getState().apple;
-})
-
-document.getElementById("purchase").addEventListener('click', ()=>{
-    store.dispatch({type: "buy-apple"});
-})
-document.getElementById("apples").innerHTML = store.getState().apple;
-</script>
 </html>
