@@ -8,7 +8,8 @@ const UserComponents = () => {
     const dispatch = useDispatch();
     
     const handleGetUser = () => {
-        dispatch(getUsers());
+        /* without thunk */
+        getUsers(dispatch);
     }
     return (
         <div>

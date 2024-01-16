@@ -21,14 +21,13 @@ export const recieveUserError = (error) => {
         payload: error
     }
 }
-
-export const getUsers = () => {
-    return (dispatch)=> {
+/* without thunk */
+export const getUsers = (dispatch) => { 
         dispatch(sendUserRequest());
         axios.get('https://jsonplaceholder.typicode.com/users').then(res=>{
             dispatch(recieveUserResponse(res.data));
         }).catch(err=>{
             dispatch(recieveUserError(err.message))
     })
-    }
+    
 }
