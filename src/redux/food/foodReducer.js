@@ -7,7 +7,7 @@ const states = {
 const foodReducer = (state = states, action) => {
     switch (action.type) {
         case BUY_SANDWICH:
-            return {...state, sandwich: state.sandwich - 1}
+            return {...state, sandwich: state.sandwich - action.payload}
     
         default:
             return state
