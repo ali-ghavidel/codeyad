@@ -1,6 +1,6 @@
 import { legacy_createStore } from 'redux'
-import fruitReducer from './fruit/fruitReducer'
+import { rootReducer } from './rootReducer';
 
-const store = legacy_createStore(fruitReducer);
+const store = legacy_createStore(rootReducer);
 
 export default store;
